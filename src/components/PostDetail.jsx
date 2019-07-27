@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 class PostDetails extends React.Component {
   
@@ -22,19 +22,43 @@ class PostDetails extends React.Component {
     this.state = {
       text: myPost.text,
       comments: myPost.comments,
-      newText: ''
+      newText: '',
+      redirect: false
     }
   }
 
+  componentDidUpdate (oldProps, oldState) {
+    // aqui seguimos el proximo
+    
+  }
+
+  prepareDelete = () => {
+
+    this.props.handleDeletePost(this.props.match.params.id)
+    this.setState({
+      redirect: true
+    })
+  }
+
   render () {
+
+    if (this.state.redirect) return <Redirect to="/posts"/>
     let id = this.props.match.params.id
-    console.log('PostDetail.props', this.props)
-    let comments = this.state.comments.map(c => <div style={{border: '1px solid blue'}}>{c}</div>)
+    console.log('PostDetailstate.props', this.props)
+    let comments = this..comments.map((c, index) => {
+      return <div style={{border: '1px solid blue'}}>
+        {c}
+        <button onClick={() => this.props.handleDeleteComment(index, id)}>X</button>
+      </div>
+    })
     return <div style={{border: '1px solid red'}}>
       <Link to="/posts">Regresar</Link>
       <div>
         {this.state.text}
 
+      </div>
+      <div>
+        <button onClick={this.prepareDelete}>Borrar Post</button>
       </div>
       <div>
         <textarea onChange={this.props.handleUpdateNewCommentText} value={this.props.newText}></textarea>

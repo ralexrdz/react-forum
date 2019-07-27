@@ -5,7 +5,12 @@ function PostList (props) {
     console.log('asdasd');
     
     let posts = props.posts.map(p => 
-      <Post text={p.text} comments={p.comments} id={p.id}/>
+      <Post 
+        text={p.text} 
+        comments={p.comments} 
+        id={p.id} 
+        handleDeletePost={props.handleDeletePost}
+      />
     )
     return <div>
       <h1>PostList</h1>

@@ -30,14 +30,25 @@ class App extends React.Component {
   }
 
   addPost = () => {
+    let id = this.state.posts.length > 0 ?
+     this.state.posts[ this.state.posts.length-1 ].id + 1 :
+     1
     let newPost = {
-      id: this.state.posts[ this.state.posts.length-1 ].id + 1,
+      id ,
       text: this.state.newPostText,
       comments: []
     }
     this.setState({
       posts: [...this.state.posts, newPost],
       newPostText: ''
+    })
+  }
+
+  deletePost = (postId) => {
+    console.log('deletePost', postId)
+    let posts = this.state.posts.filter(p => p.id != postId)
+    this.setState({
+      posts
     })
   }
 
@@ -61,6 +72,21 @@ class App extends React.Component {
     this.setState({
       posts,
       newCommentText: ''
+    })
+  }
+
+  deleteComment = (index, postId) => {
+    console.log('DeleteCommente', index, postId)
+
+    let posts = [...this.state.posts]
+
+    let post =  posts.find(p => p.id == postId)
+
+    post.comments = [...post.comments.filter((c, i) => i != index )]
+    console.log(post.comments)
+    console.log(posts)
+    this.setState({
+      posts: [...posts]
     })
   }
 
@@ -102,6 +128,7 @@ class App extends React.Component {
                 <PostList 
                   posts={this.state.posts} 
                   newText={this.state.newPostText} 
+                  handleDeletePost={this.deletePost}
                   handleAddPost={this.addPost}
                   handleUpdateNewPostText={this.updateNewPostText}
                 />
@@ -116,6 +143,8 @@ class App extends React.Component {
               return <PostDetails 
                 posts={this.state.posts}
                 newText={this.state.newCommentText} 
+                handleDeletePost={this.deletePost}
+                handleDeleteComment={this.deleteComment}
                 handleAddComment={this.addComment}
                 handleUpdateNewCommentText={this.updateNewCommentText}
                 {...routeProps}

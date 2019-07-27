@@ -40,6 +40,9 @@ class Post extends React.Component {
         <Link to={"/posts/" + this.props.id}>Ver Más</Link>
       </div>
       <div>Comments: {this.state.comments.length}</div>
+      <div>
+        <button onClick={()=> this.props.handleDeletePost(this.props.id)}>X</button>
+      </div>
       {/* <div>
         <textarea onChange={this.updateNewCommentText} value={this.state.newText}></textarea>
         <div><button onClick={this.addComment}>Comentar</button></div>
