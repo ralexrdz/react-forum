@@ -4,6 +4,7 @@ import Post from './Post.jsx'
 class PostList extends React.Component {
   constructor (props) {
     super(props)
+    console.log('PostList.props', props)
     this.state = {
       posts: props.posts,
       newText: ''
