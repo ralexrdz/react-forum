@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { Link } from "react-router-dom";
+
 class Post extends React.Component {
   
   constructor (props) {
@@ -27,13 +29,18 @@ class Post extends React.Component {
   }
 
   render () {
-    let comments = this.state.comments.map(c => <div style={{border: '1px solid blue'}}>{c}</div>)
+    console.log('Post.props', this.props)
+    // let comments = this.state.comments.map(c => <div style={{border: '1px solid blue'}}>{c}</div>)
     return <div style={{border: '1px solid red'}}>
       <div>
         {this.props.text}
 
       </div>
       <div>
+        <Link to={"/posts/" + this.props.id}>Ver Más</Link>
+      </div>
+      <div>Comments: {this.state.comments.length}</div>
+      {/* <div>
         <textarea onChange={this.updateNewCommentText} value={this.state.newText}></textarea>
         <div><button onClick={this.addComment}>Comentar</button></div>
       </div>
@@ -41,7 +48,7 @@ class Post extends React.Component {
         {
           comments
         }
-      </div>
+      </div> */}
     </div>
   } 
 }

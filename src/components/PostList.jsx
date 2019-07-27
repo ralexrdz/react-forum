@@ -1,47 +1,19 @@
 import React from 'react'
 import Post from './Post.jsx'
 
-class PostList extends React.Component {
-  constructor (props) {
-    super(props)
-    console.log('PostList.props', props)
-    this.state = {
-      posts: props.posts,
-      newText: ''
-    }
-  }
+function PostList (props) {
 
-  addPost = () => {
-    let newPost = {
-      text: this.state.newText,
-      comments: []
-    }
-    this.setState({
-      posts: [...this.state.posts, newPost],
-    })
-  }
-
-  updateNewPostText = (e) => {
-    console.log(e.target.value)
-    this.setState({
-      newText: e.target.value
-    })
-  }
-
-  render() {
-
-    let posts = this.state.posts.map(p => 
-      <Post text={p.text} comments={p.comments}/>
+    let posts = props.posts.map(p => 
+      <Post text={p.text} comments={p.comments} id={p.id}/>
     )
     return <div>
       <h1>PostList</h1>
-      <textarea onChange={this.updateNewPostText} value={this.state.newText}></textarea>
-      <div><button onClick={this.addPost}>Agregar Post</button></div>
+      <textarea onChange={props.handleUpdateNewPostText} value={props.newText}></textarea>
+      <div><button onClick={props.handleAddPost}>Agregar Post</button></div>
       {
         posts
       }
     </div>
-  }
 }
 
 export default PostList
