@@ -29,7 +29,9 @@ class PostList extends React.Component {
 
   render() {
 
-    let posts = this.state.posts.map(p => <Post text={p.text} comments={p.comments}/>)
+    let posts = this.state.posts.map(p => 
+      <Post text={p.text} comments={p.comments}/>
+    )
     return <div>
       <h1>PostList</h1>
       <textarea onChange={this.updateNewPostText} value={this.state.newText}></textarea>

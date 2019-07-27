@@ -23,6 +23,7 @@ function App() {
       <ConOSinSubtitulo titulo="Hola" subtitulo="Adios" muestraSubtitulo/>
       <SmartDump algo="hola"/> */}
       <PostList posts={dummyPosts}/>
+      
     </div>
   );
 }
