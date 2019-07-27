@@ -2,7 +2,8 @@ import React from 'react'
 import Post from './Post.jsx'
 
 function PostList (props) {
-
+    console.log('asdasd');
+    
     let posts = props.posts.map(p => 
       <Post text={p.text} comments={p.comments} id={p.id}/>
     )
